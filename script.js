@@ -44,25 +44,50 @@ showLine();
 const terminal=document.getElementById("terminal-interface");
 const input=document.getElementById("command-input");
 const output =document.getElementById("terminal-output");
+let commandHistory =[];
+let historyIndex=0;
 
 
 input.addEventListener("keydown",
     function(event){
-
-        if(event.key=="Enter"){
-            let command = input.value.trim();
-            if(command!=""){
-                processCommand(command)
-            }
-            input.value="";
+        if(event.key =="Enter"){
+            let command =input.value.trim();
+        if(command!==""){
+            commandHistory.push(command);
+            historyIndex=commandHistory.length;
+            processCommand(command);
         }
+        input.value ="";
+        }
+        else if(event.key === "ArrowUp"){
+            event.preventDefault();
+            if(historyIndex>0){
+                historyIndex--;
+                input.value = commandHistory[historyIndex];
+            }
+        }
+        else if(event.key==="ArrowDown"){
+            event.preventDefault();
+            if(historyIndex<commandHistory.length-1){
+                historyIndex++;
+                input.value=commandHistory[historyIndex];
+            }
+            else{
+                historyIndex = commandHistory.length;
+                input.value ="";
+
+            }
+        }
+         
+
+        
     }
 
 
 )
 function processCommand(command){
     let cmd =command.toLowerCase();
-    output.innerHTML+=`<div class="command-block"><p>BLACKWOOD</p>${command}</p></div>`;
+    output.innerHTML+=`<div class="command-block"><p>BLACKWOOD</p><p>${command}</p></div>`;
    
     if(cmd==="help"){   //will list all the commands avaiable
         const commands =[

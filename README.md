@@ -27,11 +27,14 @@ clear
 audio
 manifesto
 disturb
+### why I made this
+I made this because its fun . made for 3am :)
 
 ##  Run locally
 
 1. clone the repo
-``` git clone https://github.com/nAItiklearn/BLACKWOOD-18
+```
+git clone https://github.com/nAItiklearn/BLACKWOOD-18
 ```
 2. open website in browser using preview or live server(no packages required)
 

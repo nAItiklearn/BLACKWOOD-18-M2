@@ -85,11 +85,9 @@ input.addEventListener("keydown",
 
 
 )
-let presencse_detected =false
-let admin_access = false
 
-const root_password ="0410";
-
+let presencse_detected =false;
+let admin_access =false;
 function processCommand(command){
     let cmd =command.toLowerCase();
     output.innerHTML+=`<div class="command-block"><p>BLACKWOOD</p><p>${command}</p></div>`;
@@ -103,13 +101,8 @@ function processCommand(command){
             {name:"audio",      desc:"just audio"},
             {name:"manifesto",   desc:"read last entry"},
             {name:"scan",        desc:"run system scans"},
-            {name:"ls",          desc:"see available files"},
             {name:"cat<file>",     desc:"read a file"},
-            {name:"clock",          desc:"system time"},
             {name:"whoami",       desc:"identify current setup"},
-            {name:"listen",      desc:"listen"},
-            {name:"sudo<password>",  desc:"request access"},
-            {name:"sudo rm -rf",    desc:"by by"}
 
         ];
         let htmlOutput = "<p>---------</p><p>AVAILABLE COMMANDS</p><p>-------</p>"
@@ -188,7 +181,7 @@ function processCommand(command){
             },2500);
         }
     else if(cmd==="scan"){
-        presencse_detected = true;
+        presence_detected = true;
         output.innerHTML += `
         <p>BLACKWOOD SYSTEM SCAN</p>
         <p>CPU: POTATO</p>
@@ -211,21 +204,21 @@ function processCommand(command){
             <p>USER:ROOT<p>
             <p>PERMISSION : UNRESTRICTED<p>
             <p>SESSION OWNER: HRIDHAN<p>
-            <p>WELCOME BACK, ADMINISTRATOR:)</p>`;
+            <p>WELCOME BACK, ADMINISTRATOR</p>`;
         }
         else if(presencse_detected){
             output.innerHTML+=`
             <p>USER: GUEST<p>
             <p>PERMISSIONS: RESTRICTED<p>
             <p>SESSION OWNER: UNKNOWN</p>
-            <p>ADDITIONAL PRESENCE: YES , YOURE COOKED`;
+            <p>ADDITIONAL PRESENCE: YES , YOURE COOKED</p>`;
 
         }
         else{
             output.innerHTML+=`
             <p>USER: GUEST</p>
             <p>PERMISSIONS: RESTRICTIONS<p>
-            <p>SESSION OWNER: GUEST`;
+            <p>SESSION OWNER: GUEST</p>`;
         }
     }
 

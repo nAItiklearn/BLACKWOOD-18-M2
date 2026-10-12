@@ -85,6 +85,11 @@ input.addEventListener("keydown",
 
 
 )
+let presencse_detected =false
+let admin_access = false
+
+const root_password ="0410";
+
 function processCommand(command){
     let cmd =command.toLowerCase();
     output.innerHTML+=`<div class="command-block"><p>BLACKWOOD</p><p>${command}</p></div>`;
@@ -96,7 +101,15 @@ function processCommand(command){
             {name:"clear",      desc:"clear terminal"},
             {name:"disturb",     desc:"dont" },
             {name:"audio",      desc:"just audio"},
-            {name:"manifesto",   desc:"read last entry"}
+            {name:"manifesto",   desc:"read last entry"},
+            {name:"scan",        desc:"run system scans"},
+            {name:"ls",          desc:"see available files"},
+            {name:"cat<file>",     desc:"read a file"},
+            {name:"clock",          desc:"system time"},
+            {name:"whoami",       desc:"identify current setup"},
+            {name:"listen",      desc:"listen"},
+            {name:"sudo<password>",  desc:"request access"},
+            {name:"sudo rm -rf",    desc:"by by"}
 
         ];
         let htmlOutput = "<p>---------</p><p>AVAILABLE COMMANDS</p><p>-------</p>"
@@ -174,6 +187,49 @@ function processCommand(command){
                 output.style.filter="";
             },2500);
         }
+    else if(cmd==="scan"){
+        presencse_detected = true;
+        output.innerHTML += `
+        <p>BLACKWOOD SYSTEM SCAN</p>
+        <p>CPU: POTATO</p>
+        <p>MEMORY: 67% USED</p>
+        <p>CLOCK: 3AM<p>
+        <p>pROCESS 003: UNKOWN<p>
+        <P>PROCESS 004: NOT SAFE<p>
+        <p>SCAN COMPLETE></p>
+        `;
+    }
+    else if(cmd==="clock"){
+        output.innerHTML+=`
+        <p>BLACKWOOD CLOCK DIAGNOSTICS<p>
+        <p>LAST BOOT: 15/7/2009<p>
+        <p>UPTIME: 00:00:00<p>`
+    }
+    else if(cmd ==="whoami"){
+        if(admin_access){
+            output.innerHTML+=`
+            <p>USER:ROOT<p>
+            <p>PERMISSION : UNRESTRICTED<p>
+            <p>SESSION OWNER: HRIDHAN<p>
+            <p>WELCOME BACK, ADMINISTRATOR:)</p>`;
+        }
+        else if(presencse_detected){
+            output.innerHTML+=`
+            <p>USER: GUEST<p>
+            <p>PERMISSIONS: RESTRICTED<p>
+            <p>SESSION OWNER: UNKNOWN</p>
+            <p>ADDITIONAL PRESENCE: YES , YOURE COOKED`;
+
+        }
+        else{
+            output.innerHTML+=`
+            <p>USER: GUEST</p>
+            <p>PERMISSIONS: RESTRICTIONS<p>
+            <p>SESSION OWNER: GUEST`;
+        }
+    }
+
+
     else {
         output.innerHTML+="<p>   UNKNOWN COMMAND   "+  command  +"</p>"
 
